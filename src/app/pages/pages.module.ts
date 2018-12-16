@@ -22,6 +22,7 @@ import { IncrementadorComponent } from '../components/incrementador/incrementado
 
 // importcion de graficas modulo
 import { ChartsModule } from 'ng2-charts';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
  
 
@@ -33,7 +34,8 @@ import { ChartsModule } from 'ng2-charts';
         Graficas1Component,
         PagesComponent,
         IncrementadorComponent,
-        GraficoDonaComponent
+        GraficoDonaComponent,
+        AccountSettingsComponent
     ],
     exports: [
         // se colocan los componentes a los que se puede acceder desde afuera.

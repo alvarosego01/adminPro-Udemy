@@ -7,9 +7,17 @@ import { NopageFoundComponent } from './nopage-found/nopage-found.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 
- 
+// uso de router link
+import { RouterModule } from '@angular/router';
+// uso de ngif ngfor. entre otros.. uso de pipes
+import { CommonModule } from '@angular/common';
+
 
 @NgModule({
+    imports: [
+        RouterModule,
+        CommonModule
+    ],
     declarations: [
         BreadcrumbsComponent,
         HeaderComponent,
