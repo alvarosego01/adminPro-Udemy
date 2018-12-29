@@ -21,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // servicios
 import { ServiceModule } from './services/service.module';
+ 
 
  
 
@@ -29,7 +30,7 @@ import { ServiceModule } from './services/service.module';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent   
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

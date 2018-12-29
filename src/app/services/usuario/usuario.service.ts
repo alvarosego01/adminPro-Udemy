@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 
 // para poder usar el map
 import { map } from 'rxjs/operators';
+import { SubirArchivoService } from '../subirArchivo/subir-archivo.service';
  
 
 @Injectable({
@@ -22,7 +23,8 @@ export class UsuarioService {
 
   constructor(
     public http: HttpClient,
-    public router: Router
+    public router: Router,
+    public _subirArchivoService: SubirArchivoService
   ) {
     // se llama al cargar storage siempre que se inicialize el servicio para que tengan datos manejables.
     this.cargarStorage();
@@ -147,6 +149,50 @@ export class UsuarioService {
 
   }
 
+  /* -------------------------------------
+      <- Actualizar Usuarios ->
+      Descripción: Recibe la información por
+      parametro y la actualiza.
+    --------------------------------------- */
+  actualizarUsuario( usuario:Usuario ){
 
+    let url = URL_SERVICIOS + '/usuario/' + usuario._id;
+    url += '?token=' + this.token;
+    console.log(url);
+    
+
+    return this.http.put( url, usuario ).pipe(
+      map( (resp:any)=>{
+        // se actualiza localmente la información
+        let userResp: Usuario = resp.usuario
+        this.guardarStorage( userResp._id, this.token, userResp );
+        swal( 'Usuario actualizado', usuario.nombre , 'success');
+
+        return true;
+      })
+    );
+
+  }
+  
+  /* -------------------------------------
+      <- Cambiar imagen ->
+      Descripción: Con este metodo se cambia
+      la imagen de perfil designada de un usuario
+      recibe el file que seria la imagen y el id
+      del usuario.
+    --------------------------------------- */
+  cambiarImagenPerfil( archivo: File, id: string ){
+    
+    this._subirArchivoService.subirArchivo( archivo, 'usuarios', id )
+      .then( (resp:any) =>{
+        this.usuario.img = resp.usuario.img;
+        swal('Imagen actualizada',this.usuario.nombre, 'success' );
+        this.guardarStorage( id, this.token, this.usuario );
+      })
+      .catch( resp => {
+        
+      });
+
+  }
 
 }

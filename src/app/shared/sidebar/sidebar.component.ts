@@ -1,3 +1,4 @@
+import { Usuario } from 'src/app/models/usuario.model';
 import { Component, OnInit } from '@angular/core';
 
 // servicios
@@ -10,12 +11,16 @@ import { SidebarService, UsuarioService } from 'src/app/services/service.index';
 })
 export class SidebarComponent implements OnInit {
 
+  // se crea referencia para manejar data de usuario
+  usuario: Usuario;
+
   constructor(
     public _sidebarService: SidebarService,
     public _usuarioService: UsuarioService
   ) { }
 
   ngOnInit() {
+    this.usuario = this._usuarioService.usuario;
   }
 
 }

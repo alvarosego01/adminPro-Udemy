@@ -11,12 +11,14 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 // uso de ngif ngfor. entre otros.. uso de pipes
 import { CommonModule } from '@angular/common';
-
+// modulos de pipes
+import { PipesModule } from './../pipes/pipes.module';
 
 @NgModule({
     imports: [
         RouterModule,
-        CommonModule
+        CommonModule,
+        PipesModule
     ],
     declarations: [
         BreadcrumbsComponent,
