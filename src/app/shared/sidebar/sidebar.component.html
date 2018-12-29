@@ -15,7 +15,7 @@
             <li><a [routerLink]="['/routePath']" routerLinkActive="active" >My Balance</a></li>
             <li><a [routerLink]="['/routePath']" routerLinkActive="active" >Inbox</a></li>
             <li><a [routerLink]="['/routePath']" routerLinkActive="active" >Account Setting</a></li>
-            <li><a [routerLink]="['/login']" >Logout</a></li>
+            <li><a class="pointer" (click)="_usuarioService.logout()" >Logout</a></li>
           </ul>
         </li>
         <li class="nav-devider"></li>

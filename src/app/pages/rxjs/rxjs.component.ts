@@ -32,13 +32,13 @@ export class RxjsComponent implements OnInit, OnDestroy {
       // un observable en subscripcion tiene 3 etapas.. 1 cuando se efectuan las cosas.. el segundo es un error en caso de que suceda algo y por ultimo cuando termina.
       .subscribe(
         numero => {
-          // console.log("subscriber de observable", numero);
+          console.log("subscriber de observable", numero);
         },
         error => {
-          // console.error("El error del observable fue", error);
+          console.error("El error del observable fue", error);
         },
         () => {
-          // console.log("El observable ha terminado.");
+          console.log("El observable ha terminado.");
         }
       );
   }
@@ -111,3 +111,7 @@ export class RxjsComponent implements OnInit, OnDestroy {
     //     });
   }
 }
+
+
+
+

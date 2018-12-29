@@ -1,3 +1,4 @@
+import { LoginGuardGuard } from './../services/guards/login-guard.guard';
 import { Routes, RouterModule } from "@angular/router";
 
 import { PagesComponent } from './pages.component';
@@ -15,6 +16,8 @@ const pagesRoutes: Routes = [
     {
         path: '',
         component: PagesComponent,
+        // para efectuar el guard se inyecta con este parametro de canactivate..ademas se le pueden especificar otros tipos de guards personalizados.
+        canActivate: [ LoginGuardGuard ],
         children: [
             { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard' } },
             { path: 'progress', component: ProgressComponent, data: { titulo: 'Progress' } },

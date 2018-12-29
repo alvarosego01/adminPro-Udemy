@@ -15,7 +15,7 @@ import { APP_ROUTES } from './app.routes';
 // modulos
 import { PagesModule } from './pages/pages.module';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -36,6 +36,8 @@ import { ServiceModule } from './services/service.module';
     APP_ROUTES,
     PagesModule,
     FormsModule,
+    // se importa reactive forms module para usar la aproximación de formularios por typescript
+    ReactiveFormsModule,
     ServiceModule
   ],
   providers: [
