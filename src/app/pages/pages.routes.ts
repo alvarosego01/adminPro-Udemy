@@ -1,3 +1,4 @@
+import { UsuariosComponent } from './usuarios/usuarios.component';
 import { LoginGuardGuard } from './../services/guards/login-guard.guard';
 import { Routes, RouterModule } from "@angular/router";
 
@@ -27,6 +28,10 @@ const pagesRoutes: Routes = [
             { path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJs' } },
             { path: 'accountSettings', component: AccountSettingsComponent, data: { titulo: 'Ajustes del tema' } },
             { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de usuario' } },
+            
+            // Mantenimientos
+
+            { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de usuario' } },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]
     }

@@ -1,0 +1,35 @@
+
+
+<div class="fondoNegro animated fadeIn" [ngClass]="_modalUploadServices.oculto">
+
+  
+  <!-- Modal -->
+  <div class="modal" style="display: block" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+<button (click)="cerrarModal()" type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+         <img *ngIf="!imagenTemporal" [src]="xxx | imagen" alt="" class="w150">
+          
+          <img *ngIf="imagenTemporal" [src]="imagenTemporal" alt="" class="w150">
+          
+          <!-- con la directiva change ejecuta un metodo  al recibir cambios-->
+          <input (change)="seleccionImagen( $event.target.files[0] )" type="file" name="" id="">
+          <br>
+          <br>
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button (click)="subirImagen()" [disabled]="!imagenTemporal" type="button" class="btn btn-primary">Subir imagen</button>
+        <button (click)="cerrarModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
