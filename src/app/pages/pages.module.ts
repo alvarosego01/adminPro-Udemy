@@ -33,6 +33,9 @@ import { PipesModule } from './../pipes/pipes.module';
 
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { HospitalesComponent } from './hospitales/hospitales.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { MedicoComponent } from './medicos/medico.component';
 
 @NgModule({
     declarations: [
@@ -47,7 +50,10 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
         RxjsComponent,
         ProfileComponent,
         UsuariosComponent,
-        ModalUploadComponent
+        ModalUploadComponent,
+        HospitalesComponent,
+        MedicosComponent,
+        MedicoComponent
     ],
     exports: [
         // se colocan los componentes a los que se puede acceder desde afuera.

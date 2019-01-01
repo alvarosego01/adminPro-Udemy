@@ -1,3 +1,6 @@
+import { MedicoComponent } from './medicos/medico.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { HospitalesComponent } from './hospitales/hospitales.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { LoginGuardGuard } from './../services/guards/login-guard.guard';
 import { Routes, RouterModule } from "@angular/router";
@@ -31,7 +34,10 @@ const pagesRoutes: Routes = [
             
             // Mantenimientos
 
-            { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de usuario' } },
+            { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de Usuario' } },
+            { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Mantenimiento de Hospitales' } },
+            { path: 'medicos', component: MedicosComponent, data: { titulo: 'Mantenimiento de Medicos' } },
+            { path: 'medico/:id', component: MedicoComponent, data: { titulo: 'Actualizar Medico' } },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]
     }
@@ -39,3 +45,4 @@ const pagesRoutes: Routes = [
 
 // se coloca for child por que son rutas hijas que estan dentro de otras
 export const PAGES_ROUTES = RouterModule.forChild( pagesRoutes );
+

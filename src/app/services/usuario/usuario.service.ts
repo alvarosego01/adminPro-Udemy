@@ -160,7 +160,6 @@ export class UsuarioService {
     url += '?token=' + this.token;
     // console.log(url);
     
-
     return this.http.put( url, usuario ).pipe(
       map( (resp:any)=>{
         // se actualiza localmente la información
