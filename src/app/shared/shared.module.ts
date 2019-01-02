@@ -1,3 +1,4 @@
+import { ModalUploadComponent } from './../components/modal-upload/modal-upload.component';
 
 import { NgModule } from '@angular/core';
 
@@ -24,14 +25,16 @@ import { PipesModule } from './../pipes/pipes.module';
         BreadcrumbsComponent,
         HeaderComponent,
         NopageFoundComponent,
-        SidebarComponent
+        SidebarComponent,
+        ModalUploadComponent
     ],
     exports: [
         // se colocan los componentes a los que se puede acceder desde afuera.
         BreadcrumbsComponent,
         HeaderComponent,
         NopageFoundComponent,
-        SidebarComponent
+        SidebarComponent,
+        ModalUploadComponent
     ]
 })
 
