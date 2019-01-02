@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 // modelo de datos de usuario
@@ -17,11 +18,17 @@ export class HeaderComponent implements OnInit {
   usuario: Usuario;
 
   constructor(
-    public _usuarioService: UsuarioService
+    public _usuarioService: UsuarioService,
+    public router: Router
   ) { }
 
   ngOnInit() {
     this.usuario = this._usuarioService.usuario;
   }
 
+  buscar( termino: string ){
+
+    this.router.navigate(['/busqueda', termino]);
+
+  }
 }

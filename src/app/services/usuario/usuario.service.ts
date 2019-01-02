@@ -9,7 +9,12 @@ import { HttpClient } from '@angular/common/http';
 
 
 // para poder usar el map
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+import { throwError } from 'rxjs/internal/observable/throwError';
+ 
+
 import { SubirArchivoService } from '../subirArchivo/subir-archivo.service';
  
 
@@ -20,6 +25,8 @@ export class UsuarioService {
 
   usuario: Usuario;
   token: string;
+
+  menu: any[] = [];
 
   constructor(
     public http: HttpClient,
@@ -48,10 +55,12 @@ export class UsuarioService {
 
       this.token = localStorage.getItem('token');
       this.usuario = JSON.parse( localStorage.getItem('usuario') );
+      this.menu = JSON.parse( localStorage.getItem('menu') );
 
     }else{
       this.token = '';
       this.usuario = null;
+      this.menu = [];
     }
 
     // console.log('cargar storage token: ', this.token);
@@ -66,14 +75,18 @@ export class UsuarioService {
       para manejarse de manera dinamica sin importar
       que se elimine el navegador
     --------------------------------------- */
-  guardarStorage( id:string, token: string, usuario: Usuario ){
+  guardarStorage( id:string, token: string, usuario: Usuario, menu: any ){
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     // se almacena el usuario pero hay que tener cuidado por que la respuesta que se retorna es un objeto.. para esto se transforma en un string por que localstorage solo almacena strings
     localStorage.setItem('usuario', JSON.stringify(usuario));
+    
+    // almacenar menu
+    localStorage.setItem('menu', JSON.stringify(menu));
 
     this.usuario = usuario;
     this.token = token;
+    this.menu = menu;
   }
 
   loginGoogle( token: string ){
@@ -82,7 +95,8 @@ export class UsuarioService {
     
     return this.http.post( url, { token } ).pipe(
       map( (resp:any) =>{
-        this.guardarStorage( resp.id, resp.token, resp.usuario );
+        // console.log(resp);
+        this.guardarStorage( resp.id, resp.token, resp.usuario, resp.menu );
         return true;
       })
     );
@@ -96,10 +110,11 @@ export class UsuarioService {
   logout(){
     this.usuario = null;
     this.token = '';
-    
+    this.menu = [];
     
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
+    localStorage.removeItem('menu');
 
     // una vez al deslogear se pasa al login
     this.router.navigate(['/login']);
@@ -124,12 +139,19 @@ export class UsuarioService {
     let url =  URL_SERVICIOS + '/login';
     // una vez logeado hace falta grabar la sesión en el local storage designado. 
     return this.http.post( url, usuario ).pipe(
-      map( (resp: any) => {
-      
-        this.guardarStorage(resp.id, resp.token, resp.usuario);
-        return true;
-      })
+        map( (resp: any) => {
+          this.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu);
+          return true;
+        }),
+        catchError( err =>{
+          
+          swal( 'Error en login', err.error.mensaje, 'error');
+          return throwError(err);
+          
+        })
+        
     );
+    
 
   }
 
@@ -144,7 +166,14 @@ export class UsuarioService {
         
         swal('Usuario creado', usuario.email, 'success');
         return resp.usuario;
+      }),
+      catchError(err => {
+
+        swal(err.error.mensaje, err.error.errors.message, 'error');
+        return throwError(err);
+
       })
+
     );
 
   }
@@ -165,7 +194,7 @@ export class UsuarioService {
         // se actualiza localmente la información
         if(usuario._id === this.usuario._id){
           let userResp: Usuario = resp.usuario
-          this.guardarStorage( userResp._id, this.token, userResp );
+          this.guardarStorage( userResp._id, this.token, userResp, this.menu );
         }
         swal( 'Usuario actualizado', usuario.nombre , 'success');
 
@@ -188,7 +217,7 @@ export class UsuarioService {
       .then( (resp:any) =>{
         this.usuario.img = resp.usuario.img;
         swal('Imagen actualizada',this.usuario.nombre, 'success' );
-        this.guardarStorage( id, this.token, this.usuario );
+        this.guardarStorage( id, this.token, this.usuario, this.menu );
       })
       .catch( resp => {
         

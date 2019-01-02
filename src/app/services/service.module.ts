@@ -1,3 +1,4 @@
+import { AdminGuard } from './guards/admin.guard';
 import { ModalUploadService } from './../components/modal-upload/modal-upload.service';
  
  
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     SidebarService,
     UsuarioService,
     LoginGuardGuard,
+    AdminGuard,
     SubirArchivoService,
     ModalUploadService,
     HospitalService,
